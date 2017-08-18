@@ -12,11 +12,11 @@ describe("Note Controller", function() {
   var HTMLString = "<ul><li><div>Favourite food: not pesto</div></li></ul>"
 
   it("can be instantiated", function() {
-    assert.truthy(noteController instanceof NoteController);
+    assert.truthy(noteController instanceof NoteController, "it can be instantiated");
   });
 
   noteController.displayNoteList()
   it("inner HTML property of element is set", function() {
-    assert.truthy(elementMock.innerHTML === HTMLString);
+    assert.truthy(elementMock.innerHTML === HTMLString, "inner HTML property of element is set");
   });
 });

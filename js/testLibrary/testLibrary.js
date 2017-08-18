@@ -1,21 +1,26 @@
 (function(exports) {
 	var assert = {
-		truthy: function(assertion) {
+		truthy: function(assertion, description) {
 			if (!assertion) {
-				throw new Error("Incorrect assertion: " + assertion + " is not true");
+				error = new Error
+				document.getElementById("tests").innerHTML += ("❌ ... is an incorrect assertion!<br><br>");
+				document.getElementById("tests").innerHTML += error.stack;
+				console.log(error)
 			} else {
-				console.log("    Correct assertion" );
+				document.getElementById("tests").innerHTML += ("✅ ... is a correct assertion!<br>");
 			};
 		}
 	};
 
 	var describe = function(description, test) {
 		console.log(description)
+		document.getElementById("tests").innerHTML += ("<h3>" + description + "</h3<br>")
 		test();
 	};
 
 	var it = function(description, test) {
 		console.log("  " + description);
+		document.getElementById("tests").innerHTML += (description + ":<br>")
 		test();
 	};
 
