@@ -3,26 +3,31 @@
     this.name = name;
     self = this;
     mockFunctions.forEach(function(mockFunction) {
-      self[callCount(mockFunction)] = 0;
-      self[argumentStore(mockFunction)];
+      self[methodProperty(mockFunction, "CallCount")] = 0
+      self[methodProperty(mockFunction, "Arguments")]
       self[mockFunction] = createFunction(mockFunction);
     });
   }
 
-  function createFunction(mockFunction) {
-    return function() {
-      this[callCount(mockFunction)]++
-      this[argumentStore(mockFunction)] = arguments;
+  MockObject.prototype = {
+    returnValue: function(value) {
+      callerMethod = this.lastCaller
+      this[methodProperty(callerMethod, "ReturnValue")] = value
     }
   }
 
-  function callCount(mockFunction) {
-    return mockFunction + "CallCount";
+  function createFunction(mockFunction) {
+    return function() {
+      this.lastCaller = mockFunction;
+      this[methodProperty(mockFunction, "CallCount")]++
+      this[methodProperty(mockFunction, "Arguments")] = arguments;
+      return this[methodProperty(mockFunction, "ReturnValue")] || this;
+    }
   }
 
-  function argumentStore(mockFunction) {
-    return mockFunction + "Arguments";
+  function methodProperty(mockFunction, property) {
+    return mockFunction + property;
   }
-  
+
   exports.MockObject = MockObject;
 })(this);
