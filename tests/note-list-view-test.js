@@ -29,16 +29,12 @@ describe('Note list model', function() {
 	var manyNoteListView = new NoteListView(manyNoteListMock)
 
 	it('returns an empty html string when there are no notes', function() {
-		console.log(emptyNoteListMock)
-		console.log(emptyNoteListView)
 		assert.truthy(emptyNoteListView.getHTML() === "<ul></ul>")
 	})
 
 	it('returns an html string for list with a single note', function() {
-		console.log(singleNoteListView)
 		assert.truthy(singleNoteListView.getHTML() === "<ul><li><div>I am a test</div></li></ul>")
 	})
-	console.log(manyNoteListView)
 	it('returns an html string for list with many notes', function() {
 		assert.truthy(manyNoteListView.getHTML() === "<ul><li><div>I am a test</div></li><li><div>I am a test</div></li></ul>")
 	})
